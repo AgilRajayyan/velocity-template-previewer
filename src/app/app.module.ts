@@ -6,14 +6,12 @@ import { AppComponent } from './app.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { FormsModule } from '@angular/forms';
 
-import {
-  HlmTabsComponent,
-  HlmTabsContentDirective,
-  HlmTabsListComponent,
-  HlmTabsTriggerDirective,
-} from '@spartan-ng/ui-tabs-helm';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import { HlmToasterComponent } from '@spartan-ng/ui-sonner-helm';
+import { HlmButtonDirective } from '../../spartan-ng-components/ui-button-helm/src/lib/hlm-button.directive';
+import { HlmToasterComponent } from '../../spartan-ng-components/ui-sonner-helm/src/lib/hlm-toaster.component';
+import { HlmTabsContentDirective } from '../../spartan-ng-components/ui-tabs-helm/src/lib/hlm-tabs-content.directive';
+import { HlmTabsListComponent } from '../../spartan-ng-components/ui-tabs-helm/src/lib/hlm-tabs-list.component';
+import { HlmTabsTriggerDirective } from '../../spartan-ng-components/ui-tabs-helm/src/lib/hlm-tabs-trigger.directive';
+import { HlmTabsComponent } from '../../spartan-ng-components/ui-tabs-helm/src/lib/hlm-tabs.component';
 
 @NgModule({
   declarations: [AppComponent],
