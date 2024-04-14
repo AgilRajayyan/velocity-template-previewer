@@ -1,37 +1,39 @@
 <header>
-  <img src="assets/preview.png" alt="Preview icon" height="28" />
-  <p>Velocity Template Preview</p>
+  <img class="logo" src="assets/preview.png" alt="Preview icon" height="28" />
+  <p class="text-sm">Velocity Template Preview</p>
 </header>
-<main class="container">
+
+<main>
   <div class="editors-container">
-    <div class="editor-header">Velocity Template</div>
-    <ngx-monaco-editor
-      style="height: 36vh"
-      [options]="templateEditorOptions"
-      [(ngModel)]="velocityTemplate">
-    </ngx-monaco-editor>
-    <div class="editor-header">Template Data</div>
-    <ngx-monaco-editor
-      style="height: 36vh"
-      [options]="templateDataEditorOptions"
-      [(ngModel)]="templateData">
-    </ngx-monaco-editor>
-    <button (click)="generatePreview()" class="generate-preview-button active">
-      Generate Preview
-    </button>
-  </div>
-  <div class="preview-container">
-    <div class="preview-title-container">
-      <p>Output</p>
-      <div class="action-buttons-container">
-        <button (click)="onChangePreviewType('ACTUAL-OUTPUT')" [ngClass]="{ active: previewType === 'ACTUAL-OUTPUT' }">
-          Show Preview
-        </button>
-        <button (click)="onChangePreviewType('HTML')" [ngClass]="{ active: previewType === 'HTML' }">
-          Show HTML
-        </button>
-      </div>
+    <div>
+      <div class="editor-header">Velocity Template</div>
+      <ngx-monaco-editor class="monaco-editor" [options]="templateEditorOptions"
+        [(ngModel)]="velocityTemplate">
+      </ngx-monaco-editor>
     </div>
-    <div #previewContainer class="preview-content" [ngClass]="{ 'html-preview': previewType === 'HTML' }"></div>
+    <div>
+      <div class="editor-header">Template Data</div>
+      <ngx-monaco-editor class="monaco-editor" [options]="templateDataEditorOptions"
+        [(ngModel)]="templateData">
+      </ngx-monaco-editor>
+    </div>
+  </div>
+
+  <div class="generate-preview">
+    <button hlmBtn (click)="generatePreview()">Generate Preview</button>
+  </div>
+
+  <div class="preview-container">
+    <hlm-tabs tab="showPreview">
+      <hlm-tabs-list class="grid w-full grid-cols-2" aria-label="Tabs for Preview and it's HTML">
+        <button hlmTabsTrigger="showPreview">Show Preview</button>
+        <button hlmTabsTrigger="showHtml">Show HTML</button>
+      </hlm-tabs-list>
+      <div class="output-container" hlmTabsContent="showPreview" #previewContainer></div>
+      <div class="html-preview-container" hlmTabsContent="showHtml" #htmlPreviewContainer></div>
+    </hlm-tabs>
   </div>
 </main>
+
+<!-- Error toast -->
+<hlm-toaster />
