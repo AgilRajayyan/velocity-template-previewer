@@ -43,6 +43,12 @@
       ],
       "@spartan-ng/ui-input-helm": [
         ".\\spartan-ng-components/ui-input-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-spinner-helm": [
+        ".\\spartan-ng-components/ui-spinner-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-card-helm": [
+        ".\\spartan-ng-components/ui-card-helm/src/index.ts"
       ]
     }
   },
