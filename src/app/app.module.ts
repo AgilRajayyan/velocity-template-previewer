@@ -24,9 +24,10 @@ import { HlmCardDescriptionDirective } from '../../spartan-ng-components/ui-card
 import { HlmCardHeaderDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-header.directive';
 import { HlmCardTitleDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-title.directive';
 import { HlmCardDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card.directive';
+import { EditorAndPreviewComponent } from './components/editor-and-preview/editor-and-preview.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditorAndPreviewComponent],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,

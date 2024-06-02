@@ -1,39 +1,8 @@
-<header>
-  <img class="logo" src="assets/preview.png" alt="Preview icon" height="28" />
-  <p class="text-sm">Velocity Template Preview</p>
+<header class="shadow-md flex items-center gap-3 py-3 px-8 mb-7">
+  <img class="logo h-7" src="assets/preview.png" alt="Preview icon" height="28" />
+  <h1 class="text-sm font-medium">Velocity Template Preview</h1>
 </header>
-
-<main>
-  <div class="editors-container">
-    <div>
-      <div class="editor-header">Velocity Template</div>
-      <ngx-monaco-editor class="monaco-editor" [options]="templateEditorOptions"
-        [(ngModel)]="velocityTemplate">
-      </ngx-monaco-editor>
-    </div>
-    <div>
-      <div class="editor-header">Template Data</div>
-      <ngx-monaco-editor class="monaco-editor" [options]="templateDataEditorOptions"
-        [(ngModel)]="templateData">
-      </ngx-monaco-editor>
-    </div>
-  </div>
-
-  <div class="generate-preview">
-    <button hlmBtn (click)="generatePreview()">Generate Preview</button>
-  </div>
-
-  <div class="preview-container">
-    <hlm-tabs tab="showPreview">
-      <hlm-tabs-list class="grid w-full grid-cols-2" aria-label="Tabs for Preview and it's HTML">
-        <button hlmTabsTrigger="showPreview">Show Preview</button>
-        <button hlmTabsTrigger="showHtml">Show HTML</button>
-      </hlm-tabs-list>
-      <div class="output-container" hlmTabsContent="showPreview" #previewContainer></div>
-      <div class="html-preview-container" hlmTabsContent="showHtml" #htmlPreviewContainer></div>
-    </hlm-tabs>
-  </div>
-</main>
+<app-editor-and-preview></app-editor-and-preview>
 
 <!-- Error toast -->
 <hlm-toaster />
