@@ -15,8 +15,10 @@ import { HlmTabsComponent } from '../../spartan-ng-components/ui-tabs-helm/src/l
 import { HlmLabelDirective } from '../../spartan-ng-components/ui-label-helm/src/lib/hlm-label.directive';
 import { HlmInputDirective } from '../../spartan-ng-components/ui-input-helm/src/lib/hlm-input.directive';
 import { HlmSpinnerComponent } from '../../spartan-ng-components/ui-spinner-helm/src/lib/hlm-spinner.component';
-import { HttpClientModule } from '@angular/common/http';
-import { SendEmailDialogComponent } from './components/send-email-dialog/send-email-dialog.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { HlmCardContentDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-content.directive';
 import { HlmCardDescriptionDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-description.directive';
 import { HlmCardHeaderDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-header.directive';
@@ -24,8 +26,7 @@ import { HlmCardTitleDirective } from '../../spartan-ng-components/ui-card-helm/
 import { HlmCardDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card.directive';
 
 @NgModule({
-  declarations: [AppComponent, SendEmailDialogComponent],
-  providers: [],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
@@ -33,15 +34,12 @@ import { HlmCardDirective } from '../../spartan-ng-components/ui-card-helm/src/l
     MonacoEditorModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-
     HlmButtonDirective,
     HlmTabsComponent,
     HlmTabsListComponent,
     HlmTabsTriggerDirective,
     HlmTabsContentDirective,
     HlmToasterComponent,
-
     HlmLabelDirective,
     HlmInputDirective,
     HlmSpinnerComponent,
@@ -51,5 +49,6 @@ import { HlmCardDirective } from '../../spartan-ng-components/ui-card-helm/src/l
     HlmCardDescriptionDirective,
     HlmCardContentDirective,
   ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}
