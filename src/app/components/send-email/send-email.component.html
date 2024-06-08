@@ -1,0 +1,29 @@
+<section class="w-[480px] max-w-full mx-auto" hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Send Email</h3>
+    <p hlmCardDescription>Generated preview sent instantly to your mailbox</p>
+  </div>
+  <div hlmCardContent [formGroup]="emailFormGroup">
+    <label hlmLabel>Email ID</label>
+    <div class="mb-4">
+      <input class="my-1.5 w-full " placeholder="Eg: john.doe@example.com" hlmInput formControlName="recipientEmail" />
+      @if (recipientEmail.invalid && (recipientEmail.dirty || recipientEmail.touched)) {
+        @if (recipientEmail.hasError('required')) {
+          <p class="text-xs text-red-500">Please enter Email ID</p>
+        } @else if (recipientEmail.hasError('email')) {
+          <p class="text-xs text-red-500">Please enter a valid Email ID</p>
+        }
+      }
+    </div>
+    <label class="block" hlmLabel>Email Subject</label>
+    <input class="mt-1.5 w-full mb-4" placeholder="Enter Email Subject" hlmInput formControlName="emailSubject" />
+  </div>
+  <div hlmCardFooter class="flex justify-end pt-0 p-6">
+    <button hlmBtn class="flex gap-2" type="submit" (click)="sendEmail()">
+      @if (emailSendingInProgress) {
+        <hlm-spinner size="xs" />
+      }
+      <span>{{ emailSendingInProgress ? 'Sending' : 'Send' }}</span>
+    </button>
+  </div>
+</section>

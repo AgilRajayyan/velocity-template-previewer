@@ -21,9 +21,11 @@
       <hlm-tabs-list class="flex justify-center w-fit mx-auto mb-8" aria-label="Tabs for Preview and it's HTML">
         <button hlmTabsTrigger="showPreview">Show Preview</button>
         <button hlmTabsTrigger="showHtml">Show HTML</button>
+        <button hlmTabsTrigger="sendEmail">Send Email</button>
       </hlm-tabs-list>
       <div class="output-container" hlmTabsContent="showPreview" #previewContainer></div>
       <div class="font-mono" hlmTabsContent="showHtml" #htmlPreviewContainer></div>
+      <app-send-email hlmTabsContent="sendEmail" [previewHtml]="previewHtml"></app-send-email>
     </hlm-tabs>
   </div>
 </div>

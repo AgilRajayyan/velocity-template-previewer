@@ -25,9 +25,10 @@ import { HlmCardHeaderDirective } from '../../spartan-ng-components/ui-card-helm
 import { HlmCardTitleDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-title.directive';
 import { HlmCardDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card.directive';
 import { EditorAndPreviewComponent } from './components/editor-and-preview/editor-and-preview.component';
+import { SendEmailComponent } from './components/send-email/send-email.component';
 
 @NgModule({
-  declarations: [AppComponent, EditorAndPreviewComponent],
+  declarations: [AppComponent, EditorAndPreviewComponent, SendEmailComponent],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
