@@ -1,20 +1,20 @@
 <div class="container">
   <div class="grid grid-cols-[3fr_2fr] gap-3 mb-4 lg-max:grid-cols-1">
     <div>
-      <div class="text-sm p-2 px-4 rounded-tl-md rounded-tr-md bg-gray-700 text-white">Velocity Template</div>
+      <div class="text-sm p-2 px-4 rounded-tl-md rounded-tr-md bg-[#1e1e1e] text-white">Velocity Template</div>
       <ngx-monaco-editor class="!h-[70vh]" [options]="templateEditorOptions"
         [(ngModel)]="velocityTemplate">
       </ngx-monaco-editor>
     </div>
     <div>
-      <div class="text-sm p-2 px-4 rounded-tl-md rounded-tr-md bg-gray-700 text-white">Template Data</div>
+      <div class="text-sm p-2 px-4 rounded-tl-md rounded-tr-md bg-[#1e1e1e] text-white">Template Data</div>
       <ngx-monaco-editor class="!h-[70vh]" [options]="templateDataEditorOptions"
         [(ngModel)]="templateData">
       </ngx-monaco-editor>
     </div>
   </div>
   <div class="flex justify-center mb-6">
-    <button hlmBtn (click)="generatePreview()">Generate Preview</button>
+    <button hlmBtn (click)="generateAndUpdatePreview()">Generate Preview</button>
   </div>
   <div class="px-16 mb-16 md-max:p-0">
     <hlm-tabs tab="showPreview">

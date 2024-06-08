@@ -1,21 +1,40 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { parse, Compile } from 'velocityjs';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  viewChild,
+} from '@angular/core';
+import { parse, Compile, VELOCITY_AST } from 'velocityjs';
 import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-editor-and-preview',
   templateUrl: './editor-and-preview.component.html'
 })
-export class EditorAndPreviewComponent implements AfterViewInit {
+export class EditorAndPreviewComponent implements OnInit {
   templateEditorOptions = { theme: 'vs-dark', language: 'html' };
   templateDataEditorOptions = { theme: 'vs-dark', language: 'json' };
-  velocityTemplate: string = `<!DOCTYPE html>
-  <html>
+  velocityTemplate: string = '';
+  templateData: string = '';
+  previewContainer = viewChild.required<ElementRef<HTMLDivElement>>('previewContainer');
+  htmlPreviewContainer = viewChild.required<ElementRef<HTMLDivElement>>('htmlPreviewContainer');
+  previewHtml: string = '';
+
+  constructor(
+    private utilService: UtilService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.setDefaultTemplate();
+  }
+
+  setDefaultTemplate(): void {
+    this.velocityTemplate =
+`<!DOCTYPE html>
+<html>
   <head>
     <title>Email Template</title>
-    <style>
-      body { font-family: Arial, sans-serif; }
-    </style>
+    <style>body { font-family: Arial, sans-serif; }</style>
   </head>
   <body>
     <p>Hello there,</p>
@@ -50,42 +69,40 @@ export class EditorAndPreviewComponent implements AfterViewInit {
       <p>No products found</p>
     #end
   </body>
-  </html>`;
-  templateData: string = `{
-  "products": [
+</html>`;
+
+    this.templateData =
+`{
+    "products": [
       { "name": "Product A", "price": 110, "strikeoffPrice": 124 },
       { "name": "Product B", "price": 45 },
       { "name": "Product C", "price": 299 }
-  ]
+    ]
 }`;
-  @ViewChild('previewContainer') previewContainer!: ElementRef;
-  @ViewChild('htmlPreviewContainer') htmlPreviewContainer!: ElementRef;
-
-  constructor(private utilService: UtilService) {}
-
-  ngAfterViewInit(): void {
-    this.generatePreview();
   }
 
-  generatePreview(): void {
+  ngOnInit(): void {
+    this.generateAndUpdatePreview();
+  }
+
+  generateAndUpdatePreview(): void {
     try {
       const abstractSyntaxTree = parse(this.velocityTemplate);
-      try {
-        const context = JSON.parse(this.templateData);
-        const previewHtml: string = new Compile(abstractSyntaxTree).render(
-          context
-        );
-        this.updatePreviewContent(previewHtml);
-      } catch (templateDataError: any) {
-        this.utilService.showErrorToast('An error occured in Template Data', templateDataError.message);
-      }
+      this.updatePreviewContent(abstractSyntaxTree);
     } catch (templateError: any) {
       this.utilService.showErrorToast('An error occured in Template', templateError.message);
     }
   }
 
-  updatePreviewContent(previewHtml: string): void {
-    this.previewContainer.nativeElement.innerHTML = previewHtml;
-    this.htmlPreviewContainer.nativeElement.innerText = previewHtml;
+  updatePreviewContent(abstractSyntaxTree: VELOCITY_AST[]): void {
+    try {
+      const context = JSON.parse(this.templateData);
+      this.previewHtml = new Compile(abstractSyntaxTree).render(context);
+      this.previewContainer().nativeElement.innerHTML = this.previewHtml;
+      this.htmlPreviewContainer().nativeElement.innerText = this.previewHtml;
+      this.cdr.detectChanges();
+    } catch (templateDataError: any) {
+      this.utilService.showErrorToast('An error occured in Template Data', templateDataError.message);
+    }
   }
 }
