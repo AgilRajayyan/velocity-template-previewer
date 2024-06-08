@@ -15,10 +15,7 @@ import { HlmTabsComponent } from '../../spartan-ng-components/ui-tabs-helm/src/l
 import { HlmLabelDirective } from '../../spartan-ng-components/ui-label-helm/src/lib/hlm-label.directive';
 import { HlmInputDirective } from '../../spartan-ng-components/ui-input-helm/src/lib/hlm-input.directive';
 import { HlmSpinnerComponent } from '../../spartan-ng-components/ui-spinner-helm/src/lib/hlm-spinner.component';
-import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HlmCardContentDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-content.directive';
 import { HlmCardDescriptionDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-description.directive';
 import { HlmCardHeaderDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card-header.directive';
