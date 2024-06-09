@@ -23,9 +23,8 @@ import { HlmCardTitleDirective } from '../../spartan-ng-components/ui-card-helm/
 import { HlmCardDirective } from '../../spartan-ng-components/ui-card-helm/src/lib/hlm-card.directive';
 import { EditorAndPreviewComponent } from './components/editor-and-preview/editor-and-preview.component';
 import { SendEmailComponent } from './components/send-email/send-email.component';
-import { HlmIconModule, provideIcons } from '@spartan-ng/ui-icon-helm';
+import { HlmIconModule, provideIcons } from '../../spartan-ng-components/ui-icon-helm/src';
 import { lucideCode2, lucideMail, lucideSparkles, lucideView } from '@ng-icons/lucide';
-
 
 @NgModule({
   declarations: [AppComponent, EditorAndPreviewComponent, SendEmailComponent],
