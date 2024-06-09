@@ -32,21 +32,25 @@
   <div class="px-16 mb-16 md-max:p-0">
     <hlm-tabs tab="showPreview">
       <hlm-tabs-list class="flex justify-center w-fit mx-auto mb-8" aria-label="Tabs for Preview and it's HTML">
-        <button hlmTabsTrigger="showPreview" class="flex gap-2">
+        <button hlmTabsTrigger="showPreview" class="flex gap-2" (click)="showHTMLOutput = false;">
           <span>Show Preview</span>
           <hlm-icon name="lucideView" size="sm" />
         </button>
-        <button hlmTabsTrigger="showHtml" class="flex gap-2">
+        <button hlmTabsTrigger="showHtml" class="flex gap-2" (click)="showHTMLOutput = true;">
           <span>Show HTML</span>
           <hlm-icon name="lucideCode2" size="sm"></hlm-icon>
         </button>
-        <button hlmTabsTrigger="sendEmail" class="flex gap-2">
+        <button hlmTabsTrigger="sendEmail" class="flex gap-2" (click)="showHTMLOutput = false;">
           <span>Send Email</span>
           <hlm-icon name="lucideMail" size="sm"></hlm-icon>
         </button>
       </hlm-tabs-list>
-      <div class="output-container" hlmTabsContent="showPreview" #previewContainer></div>
-      <div class="font-mono" hlmTabsContent="showHtml" #htmlPreviewContainer></div>
+      <div class="output-container" hlmTabsContent="showPreview" [innerHTML]="sanitizedPreviewHtml"></div>
+      @if (showHTMLOutput) {
+        <ngx-monaco-editor class="hidden !h-[70vh] bg-[#1e1e1e] rounded-md pt-3" hlmTabsContent="showHtml" 
+          [options]="previewHtmlEditorOptions" [(ngModel)]="previewHtml">
+        </ngx-monaco-editor>
+      }
       <app-send-email hlmTabsContent="sendEmail" [previewHtml]="previewHtml"></app-send-email>
     </hlm-tabs>
   </div>
