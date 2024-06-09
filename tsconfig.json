@@ -34,6 +34,21 @@
       ],
       "@spartan-ng/ui-sonner-helm": [
         ".\\spartan-ng-components/ui-sonner-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-dialog-helm": [
+        ".\\spartan-ng-components/ui-dialog-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-label-helm": [
+        ".\\spartan-ng-components/ui-label-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-input-helm": [
+        ".\\spartan-ng-components/ui-input-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-spinner-helm": [
+        ".\\spartan-ng-components/ui-spinner-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-card-helm": [
+        ".\\spartan-ng-components/ui-card-helm/src/index.ts"
       ]
     }
   },

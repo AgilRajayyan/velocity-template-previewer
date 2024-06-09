@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="grid grid-cols-[3fr_2fr] gap-3 mb-4 lg-max:grid-cols-1">
+    <div>
+      <div class="text-sm p-3 pl-6 rounded-tl-md rounded-tr-md bg-[#1e1e1e] text-white h-16 flex items-center">
+        Velocity Template
+      </div>
+      <ngx-monaco-editor class="!h-[70vh]" [options]="templateEditorOptions"
+        [(ngModel)]="velocityTemplate">
+      </ngx-monaco-editor>
+    </div>
+    <div>
+      <div class="p-3 pl-6 rounded-tl-md rounded-tr-md bg-[#1e1e1e] text-white flex justify-between items-center">
+        <span class="text-sm">Template Data</span>
+        <button hlmBtn class="flex gap-2" variant="outline" [disabled]="templateGenerationInProgress" (click)="generateTemplateData()">
+          @if (templateGenerationInProgress) {
+            <span>Generation In Progress</span>
+            <hlm-spinner size="xs" />
+          } @else {
+            <span>Generate with AI</span>
+            <hlm-icon name="lucideSparkles" size="sm"></hlm-icon>
+          }
+        </button>
+      </div>
+      <ngx-monaco-editor class="!h-[70vh]" [options]="templateDataEditorOptions"
+        [(ngModel)]="templateData">
+      </ngx-monaco-editor>
+    </div>
+  </div>
+  <div class="flex justify-center mb-6">
+    <button hlmBtn (click)="generateAndUpdatePreview()">Generate Preview</button>
+  </div>
+  <div class="px-16 mb-16 md-max:p-0">
+    <hlm-tabs tab="showPreview">
+      <hlm-tabs-list class="flex justify-center w-fit mx-auto mb-8" aria-label="Tabs for Preview and it's HTML">
+        <button hlmTabsTrigger="showPreview" class="flex gap-2" (click)="showHTMLOutput = false;">
+          <span>Show Preview</span>
+          <hlm-icon name="lucideView" size="sm" />
+        </button>
+        <button hlmTabsTrigger="showHtml" class="flex gap-2" (click)="showHTMLOutput = true;">
+          <span>Show HTML</span>
+          <hlm-icon name="lucideCode2" size="sm"></hlm-icon>
+        </button>
+        <button hlmTabsTrigger="sendEmail" class="flex gap-2" (click)="showHTMLOutput = false;">
+          <span>Send Email</span>
+          <hlm-icon name="lucideMail" size="sm"></hlm-icon>
+        </button>
+      </hlm-tabs-list>
+      <div class="output-container" hlmTabsContent="showPreview" [innerHTML]="sanitizedPreviewHtml"></div>
+      @if (showHTMLOutput) {
+        <ngx-monaco-editor class="hidden !h-[70vh] bg-[#1e1e1e] rounded-md pt-3" hlmTabsContent="showHtml" 
+          [options]="previewHtmlEditorOptions" [(ngModel)]="previewHtml">
+        </ngx-monaco-editor>
+      }
+      <app-send-email hlmTabsContent="sendEmail" [previewHtml]="previewHtml"></app-send-email>
+    </hlm-tabs>
+  </div>
+</div>
