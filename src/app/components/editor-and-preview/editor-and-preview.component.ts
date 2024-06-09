@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { parse, Compile, VELOCITY_AST } from 'velocityjs';
 import { UtilService } from '../../services/util.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-editor-and-preview',
@@ -20,6 +21,7 @@ export class EditorAndPreviewComponent implements OnInit {
   previewContainer = viewChild.required<ElementRef<HTMLDivElement>>('previewContainer');
   htmlPreviewContainer = viewChild.required<ElementRef<HTMLDivElement>>('htmlPreviewContainer');
   previewHtml: string = '';
+  templateGenerationInProgress: boolean = false;
 
   constructor(
     private utilService: UtilService,
@@ -29,8 +31,7 @@ export class EditorAndPreviewComponent implements OnInit {
   }
 
   setDefaultTemplate(): void {
-    this.velocityTemplate =
-`<!DOCTYPE html>
+    this.velocityTemplate = `<!DOCTYPE html>
 <html>
   <head>
     <title>Email Template</title>
@@ -71,8 +72,7 @@ export class EditorAndPreviewComponent implements OnInit {
   </body>
 </html>`;
 
-    this.templateData =
-`{
+    this.templateData = `{
     "products": [
       { "name": "Product A", "price": 110, "strikeoffPrice": 124 },
       { "name": "Product B", "price": 45 },
@@ -104,5 +104,24 @@ export class EditorAndPreviewComponent implements OnInit {
     } catch (templateDataError: any) {
       this.utilService.showErrorToast('An error occured in Template Data', templateDataError.message);
     }
+  }
+
+  generateTemplateData(): void {
+    if (this.templateGenerationInProgress) {
+      return;
+    }
+    this.templateGenerationInProgress = true;
+    this.utilService.getAiGeneratedTemplateData(this.velocityTemplate).subscribe({
+      next: (response) => {
+        this.templateData = response.response;
+        this.generateAndUpdatePreview();
+        this.templateGenerationInProgress = false;
+      },
+      error: (error: HttpErrorResponse) => {
+        const errorMessage = error.error?.message || 'An error occured in generating Template data.';
+        this.utilService.showErrorToast('Error', errorMessage);
+        this.templateGenerationInProgress = false;
+      },
+    });
   }
 }
