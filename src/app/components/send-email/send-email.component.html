@@ -19,7 +19,7 @@
     <input class="mt-1.5 w-full mb-4" placeholder="Enter Email Subject" hlmInput formControlName="emailSubject" />
   </div>
   <div hlmCardFooter class="flex justify-end pt-0 p-6">
-    <button hlmBtn class="flex gap-2" type="submit" [disabled]="emailSendingInProgress" (click)="sendEmail()">
+    <button id="send-email-button" hlmBtn class="flex gap-2" type="submit" [disabled]="emailSendingInProgress" (click)="sendEmail()">
       @if (emailSendingInProgress) {
         <hlm-spinner size="xs" />
       }
